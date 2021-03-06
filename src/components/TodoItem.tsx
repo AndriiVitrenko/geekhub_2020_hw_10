@@ -1,9 +1,16 @@
 import {useDispatch} from 'react-redux';
 import {useCallback} from 'react';
-import {changeState, deleteTodo} from '../dataBase/todoList';
+import {changeState, deleteTodo} from '../store/todoList';
 
+type TodoItemPropsType = {
+    todo: {
+        text: string,
+        index: number,
+        isCompleted: boolean,
+    }
+}
 
-export function TodoItem(props) {
+export function TodoItem(props: TodoItemPropsType) {
     const dispatch = useDispatch()
 
     const {text, index, isCompleted} = props.todo;
@@ -13,14 +20,14 @@ export function TodoItem(props) {
             dispatch(deleteTodo(index))
         }
 
-        ,[index]
+        , [index, dispatch]
     )
 
     const onChangeHandler = useCallback(
         () => {
             dispatch(changeState(index))
         }
-        , [index]
+        , [index, dispatch]
     )
 
     return(
@@ -31,7 +38,7 @@ export function TodoItem(props) {
                  checked = {isCompleted}
                  onChange = {onChangeHandler} /> 
                 <span className='todo-text'>{text}</span>
-                <i className="fas fa-trash-alt" onClick={deleteHandler}></i>
+                <button className="delete" onClick={deleteHandler}><i className="far fa-trash-alt"></i></button>
             </p>
         </li>
     )

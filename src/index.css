@@ -101,10 +101,20 @@ p {
 }
 
 i {
-  margin-left: auto;
   margin-right: 1%;
   color: red;
   font-size: 20px;
+}
+
+.delete {
+  margin-left: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.delete:focus {
+  outline: none;
 }
 
 .completed .todo-text {
