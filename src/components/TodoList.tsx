@@ -1,23 +1,14 @@
-import { TodoItem } from "./TodoItem"
 import { useSelector } from 'react-redux';
-
-type TodoListState = {
-    todoList: {
-        list: [{
-            text: string,
-            index: number,
-            isCompleted: boolean,
-        }]
-    }
-}
+import { State } from '../interfaces';
+import { TodoItem } from './TodoItem';
 
 export function TodoList() {
-    const list = useSelector((state: TodoListState) => state.todoList.list)
+    const list = useSelector((state: State) => state.todoList.list)
 
     return(
         <ul>
             {list.map((todo, i) => {
-                    return <TodoItem todo = {todo} key = {i} /> 
+                    return <TodoItem index={todo.index} text={todo.text} isCompleted={todo.isCompleted} key = {i} /> 
                 })
             }
         </ul>

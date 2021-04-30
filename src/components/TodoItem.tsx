@@ -1,19 +1,10 @@
 import {useDispatch} from 'react-redux';
 import {useCallback} from 'react';
 import {changeState, deleteTodo} from '../store/todoList';
+import { Todo } from '../interfaces';
 
-type TodoItemPropsType = {
-    todo: {
-        text: string,
-        index: number,
-        isCompleted: boolean,
-    }
-}
-
-export function TodoItem(props: TodoItemPropsType) {
+export function TodoItem({text, index, isCompleted}: Todo) {
     const dispatch = useDispatch()
-
-    const {text, index, isCompleted} = props.todo;
 
     const deleteHandler = useCallback(
         () => {

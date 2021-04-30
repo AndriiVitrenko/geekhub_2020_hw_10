@@ -9,8 +9,8 @@ export function Header() {
     const addNewTodo = useCallback(
     (event) => {
         event.preventDefault()
-        dispatch(addTodo(inputRef.current?.value))
-        if (inputRef.current) {
+        if (inputRef.current?.value) {
+            dispatch(addTodo(inputRef.current.value))
             inputRef.current.value = ''
         }
     }, [dispatch])

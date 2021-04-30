@@ -1,4 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Todo } from '../interfaces'
 
 const todoListSlice = createSlice({
     name: 'todoList',
@@ -14,18 +15,18 @@ const todoListSlice = createSlice({
                 index: 1,
                 isCompleted: false
             }
-        ]
+        ] as Todo[]
     },
     reducers: {
-        addTodo(state, action) {
+        addTodo(state, action: PayloadAction<string>) {
             state.list = [{text: action.payload, index: 0, isCompleted: false}, ...state.list];
             state.list.forEach((item, index) => item.index = index)
         },
-        deleteTodo (state, action) {
+        deleteTodo (state, action: PayloadAction<number>) {
             state.list.splice(action.payload, 1)
             state.list.forEach((item, index) => item.index = index)
         },
-        changeState(state, action) {
+        changeState(state, action: PayloadAction<number>) {
             state.list[action.payload].isCompleted = !state.list[action.payload].isCompleted;
         }
     }
